@@ -1,0 +1,379 @@
+/* CSS Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variables CSS para consistencia en colores y estilos */
+:root {
+    /* Paleta de colores */
+    --color-primary: #3498db;
+    --color-secondary: #2c3e50;
+    --color-accent: #e74c3c;
+    --color-text: #333333;
+    --color-text-light: #7f8c8d;
+    --color-background: #ffffff;
+    --color-background-alt: #f9f9f9;
+
+    /* Espaciado */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 3rem;
+    --spacing-xl: 5rem;
+
+    /* Fuentes */
+    --font-family-base: 'Arial', sans-serif;
+    --font-size-base: 16px;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 2rem;
+
+    /* Bordes y sombras */
+    --border-radius: 4px;
+    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos base */
+body {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-background);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* Estilos de texto y encabezados */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: var(--font-size-xxl);
+}
+
+h2 {
+    font-size: var(--font-size-xl);
+    margin-top: var(--spacing-lg);
+}
+
+h3 {
+    font-size: var(--font-size-lg);
+    margin-top: var(--spacing-md);
+}
+
+/* Enlaces */
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+    color: var(--color-accent);
+    text-decoration: underline;
+}
+
+/* Listas */
+ul, ol {
+    margin-left: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Párrafos */
+p {
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Imágenes */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Clearfix para elementos flotantes */
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Header y navegación */
+header {
+    background-color: var(--color-background);
+    box-shadow: var(--box-shadow);
+    padding: var(--spacing-sm) 0;
+    position: relative;
+    border-bottom: 1px solid #eee;
+}
+
+.logo {
+    float: left;
+    padding: var(--spacing-xs) 0;
+}
+
+.logo a {
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    color: var(--color-secondary);
+}
+
+/* Navegación básica */
+nav {
+    float: right;
+    padding: var(--spacing-xs) 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: var(--spacing-md);
+}
+
+nav a {
+    color: var(--color-secondary);
+    font-weight: 500;
+}
+
+nav a:hover, nav a:focus {
+    color: var(--color-primary);
+}
+
+/* Sección Hero */
+#hero {
+    background-color: var(--color-background-alt);
+    padding: var(--spacing-xl) 0;
+    text-align: center;
+    clear: both;
+}
+
+.tagline {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto var(--spacing-md);
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover, .cta-button:focus {
+    background-color: var(--color-accent);
+    text-decoration: none;
+    color: white;
+}
+
+/* Sección Características */
+#caracteristicas {
+    padding: var(--spacing-xl) 0;
+    clear: both;
+}
+
+.feature {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto var(--spacing-lg);
+    background-color: var(--color-background);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+}
+
+.feature img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.feature h3 {
+    margin-top: var(--spacing-sm);
+    padding: 0 var(--spacing-sm);
+}
+
+.feature p {
+    padding: 0 var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Para pantallas más grandes, mostrar características en columnas */
+@media (min-width: 768px) {
+    .feature {
+        float: left;
+        width: 30%;
+        margin-right: 5%;
+    }
+    
+    .feature:nth-child(3n) {
+        margin-right: 0;
+    }
+    
+    .features-container {
+        overflow: hidden; /* Clearfix alternativo */
+    }
+}
+
+/* Sección Envíos */
+#envios {
+    background-color: var(--color-background-alt);
+    padding: var(--spacing-xl) 0;
+    clear: both;
+}
+
+.coverage-list, .shipping-options {
+    list-style: none;
+    margin-left: 0;
+}
+
+.coverage-list li, .shipping-options li {
+    margin-bottom: var(--spacing-xs);
+    padding-left: var(--spacing-md);
+    position: relative;
+}
+
+.coverage-list li:before, .shipping-options li:before {
+    content: "✓";
+    color: var(--color-primary);
+    position: absolute;
+    left: 0;
+}
+
+
+#pagos {
+    padding: var(--spacing-xl) 0;
+    clear: both;
+}
+
+.payment-methods, .promotions {
+    list-style: none;
+    margin-left: 0;
+}
+
+.payment-methods li, .promotions li {
+    margin-bottom: var(--spacing-xs);
+    padding-left: var(--spacing-md);
+    position: relative;
+}
+
+.payment-methods li:before {
+    content: "💳";
+    position: absolute;
+    left: 0;
+}
+
+.promotions li:before {
+    content: "🏷️";
+    position: absolute;
+    left: 0;
+}
+
+
+footer {
+    background-color: var(--color-secondary);
+    color: white;
+    padding: var(--spacing-xl) 0;
+    clear: both;
+}
+
+.contact-info, .important-links, .social-media {
+    margin-bottom: var(--spacing-lg);
+}
+
+
+@media (min-width: 768px) {
+    .contact-info {
+        float: left;
+        width: 33%;
+    }
+    
+    .important-links {
+        float: left;
+        width: 33%;
+    }
+    
+    .social-media {
+        float: left;
+        width: 33%;
+    }
+}
+
+footer h2, footer h3 {
+    color: white;
+}
+
+footer a {
+    color: white;
+    opacity: 0.8;
+}
+
+footer a:hover, footer a:focus {
+    opacity: 1;
+    color: white;
+}
+
+footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.social-media li {
+    display: inline-block;
+    margin-right: var(--spacing-sm);
+}
+
+.copyright {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    opacity: 0.8;
+    font-size: var(--font-size-sm);
+    clear: both;
+    padding-top: var(--spacing-md);
+}
+
+/* Media queries para responsividad básica */
+@media (max-width: 768px) {
+    .logo, nav {
+        float: none;
+        text-align: center;
+    }
+    
+    nav {
+        margin-top: var(--spacing-sm);
+    }
+    
+    nav ul li {
+        display: block;
+        margin: var(--spacing-xs) 0;
+    }
+}
