@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonios de Clientes - CasElite</title>
+    <style>
+        :root {
+            --color-primary: #5b21b6;
+            --color-secondary: #312e81;
+            --color-accent: #ec4899;
+            --color-text: #1f2937;
+            --color-text-light: #6b7280;
+            --color-background: #ffffff;
+            --color-background-alt: #f3f4f6;
+            --color-border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            color: var(--color-text);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--color-background-alt);
+        }
+
+        header {
+            background-color: var(--color-secondary);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo a {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .filters {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            width: 250px;
+            height: fit-content;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .rating-filter {
+            display: flex;
+            align-items: center;
+        }
+
+        .rating-filter input {
+            margin-right: 0.5rem;
+        }
+
+        .star-rating {
+            color: gold;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .testimonial-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-header h1 {
+            font-size: 1.8rem;
+        }
+
+        .sort-options {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        select {
+            padding: 0.5rem;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-header-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: bold;
+        }
+
+        .review-date {
+            color: var(--color-text-light);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-rating {
+            color: gold;
+            margin-bottom: 0.75rem;
+        }
+
+        .testimonial-text {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-product {
+            font-style: italic;
+            color: var(--color-text-light);
+            border-top: 1px solid var(--color-border);
+            padding-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--color-text);
+            background-color: white;
+        }
+
+        .pagination a.active {
+            background-color: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        footer {
+            background-color: var(--color-secondary);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .filters {
+                width: 100%;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--color-secondary);
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="/">CasElite</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Inicio</a></li>
+                    <li><a href="#caracteristicas">Productos</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#envios">Envíos</a></li>
+                    <li><a href="compras.html">Compra</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="testimonios.html">Testimonio</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="filters">
+            <div class="filter-section">
+                <h3>Valoración</h3>
+                <div class="filter-options">
+                    <div class="rating-filter">
+                        <input type="radio" id="stars5" name="rating" value="5">
+                        <label for="stars5">5</label>
+                        <span class="star-rating">★★★★★</span>
+                    </div>
+                    <div class="rating-filter">
+                        <input type="radio" id="stars4" name="rating" value="4">
+                        <label for="stars4">4+</label>
+                        <span class="star-rating">★★★★☆</span>
+                    </div>
+                    <div class="rating-filter">
+                        <input type="radio" id="stars3" name="rating" value="3">
+                        <label for="stars3">3+</label>
+                        <span class="star-rating">★★★☆☆</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Modelo de teléfono</h3>
+                <div class="filter-options">
+                    <label>
+                        <input type="checkbox" name="modelo" value="iphone">
+                        iPhone
+                    </label>
+                    <label>
+                        <input type="checkbox" name="modelo" value="samsung">
+                        Samsung
+                    </label>
+                    <label>
+                        <input type="checkbox" name="modelo" value="xiaomi">
+                        Xiaomi
+                    </label>
+                    <label>
+                        <input type="checkbox" name="modelo" value="huawei">
+                        Huawei
+                    </label>
+                    <label>
+                        <input type="checkbox" name="modelo" value="otros">
+                        Otros
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Tipo de funda</h3>
+                <div class="filter-options">
+                    <label>
+                        <input type="checkbox" name="tipo" value="silicona">
+                        Silicona
+                    </label>
+                    <label>
+                        <input type="checkbox" name="tipo" value="antigolpes">
+                        Antigolpes
+                    </label>
+                    <label>
+                        <input type="checkbox" name="tipo" value="transparente">
+                        Transparente
+                    </label>
+                    <label>
+                        <input type="checkbox" name="tipo" value="cartera">
+                        Tipo cartera
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <div class="testimonial-header">
+                <h1>Opiniones de nuestros clientes</h1>
+                <div class="sort-options">
+                    <label for="sort">Ordenar por:</label>
+                    <select id="sort">
+                        <option value="recent">Más recientes</option>
+                        <option value="rating-high">Mayor valoración</option>
+                        <option value="rating-low">Menor valoración</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="testimonial-grid">
+                <!-- Testimonio 1 -->
+                <article class="testimonial-card">
+                    <div class="testimonial-header-card">
+                        <img src="/api/placeholder/50/50" alt="Avatar" class="user-avatar">
+                        <div class="user-info">
+                            <div class="user-name">Laura Martínez</div>
+                            <div class="review-date">15 de abril, 2025</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">¡La mejor funda que he tenido! Protegió mi iPhone perfectamente cuando se me cayó desde una altura considerable. El diseño es precioso y los acabados son de gran calidad. Muy recomendable.</p>
+                    <div class="testimonial-product">Funda Antigolpes Premium para iPhone 15 Pro</div>
+                </article>
+
+                <!-- Testimonio 2 -->
+                <article class="testimonial-card">
+                    <div class="testimonial-header-card">
+                        <img src="/api/placeholder/50/50" alt="Avatar" class="user-avatar">
+                        <div class="user-info">
+                            <div class="user-name">Carlos Rodríguez</div>
+                            <div class="review-date">12 de abril, 2025</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★☆</div>
+                    <p class="testimonial-text">Muy buena relación calidad-precio. La funda es resistente y se ajusta perfectamente a mi Samsung S23. El único pequeño detalle es que los bordes de silicona se ensucian un poco con el uso, pero por lo demás es excelente.</p>
+                    <div class="testimonial-product">Funda Silicona Líquida para Samsung S23</div>
+                </article>
+
+                <!-- Testimonio 3 -->
+                <article class="testimonial-card">
+                    <div class="testimonial-header-card">
+                        <img src="/api/placeholder/50/50" alt="Avatar" class="user-avatar">
+                        <div class="user-info">
+                            <div class="user-name">Ana García</div>
+                            <div class="review-date">10 de abril, 2025</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">Compré la funda tipo cartera y me encanta. Puedo llevar mis tarjetas y no necesito billetera. El cierre magnético funciona perfectamente y la calidad del material es excelente. Además, el envío fue super rápido.</p>
+                    <div class="testimonial-product">Funda Cartera de Cuero para iPhone 14</div>
+                </article>
+
+                <!-- Testimonio 4 -->
+                <article class="testimonial-card">
+                    <div class="testimonial-header-card">
+                        <img src="/api/placeholder/50/50" alt="Avatar" class="user-avatar">
+                        <div class="user-info">
+                            <div class="user-name">Miguel Fernández</div>
+                            <div class="review-date">8 de abril, 2025</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">★★★☆☆</div>
+                    <p class="testimonial-text">La funda es bonita y se ajusta bien, pero después de un mes de uso ya se está poniendo amarillenta. Una pena porque el diseño me gustaba mucho. El servicio de entrega fue rápido eso sí.</p>
+                    <div class="testimonial-product">Funda Transparente para Xiaomi 13</div>
+                </article>
+
+                <!-- Testimonio 5 -->
+                <article class="testimonial-card">
+                    <div class="testimonial-header-card">
+                        <img src="/api/placeholder/50/50" alt="Avatar" class="user-avatar">
+                        <div class="user-info">
+                            <div class="user-name">Sofía López</div>
+                            <div class="review-date">5 de abril, 2025</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">Pedí una funda personalizada con una foto de mi mascota y quedó increíble. La calidad de impresión es excelente y la funda en sí es muy resistente. Ya van 2 caídas fuertes y ni un rasguño en el teléfono.</p>
+                    <div class="testimonial-product">Funda Personalizada para Huawei P50</div>
+                </article>
+
+                <!-- Testimonio 6 -->
+                <article class="testimonial-card">
+                    <div class="testimonial-header-card">
+                        <img src="/api/placeholder/50/50" alt="Avatar" class="user-avatar">
+                        <div class="user-info">
+                            <div class="user-name">Daniel Torres</div>
+                            <div class="review-date">2 de abril, 2025</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★☆</div>
+                    <p class="testimonial-text">Me gusta mucho la funda ecológica, el material es diferente pero muy agradable al tacto. Los botones tienen buena respuesta y los cortes son precisos. Se nota que está hecha con materiales sostenibles, lo que es un plus para mí.</p>
+                    <div class="testimonial-product">Funda Ecológica Biodegradable para iPhone 15</div>
+                </article>
+            </div>
+
+            <ul class="pagination">
+                <li><a href="#" class="active">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">→</a></li>
+            </ul>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 CasElite- Todos los derechos reservados</p>
+    </footer>
+
+
+</body>
+</html>

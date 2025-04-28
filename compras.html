@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra - FundaMania</title>
+    <style>
+        :root {
+            --color-primary: #5b21b6;
+            --color-secondary: #312e81;
+            --color-accent: #ec4899;
+            --color-text: #1f2937;
+            --color-text-light: #6b7280;
+            --color-background: #ffffff;
+            --color-background-alt: #f3f4f6;
+            --color-border: #e5e7eb;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --color-danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            color: var(--color-text);
+            line-height: 1.5;
+            background-color: var(--color-background-alt);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar en la parte superior */
+        .navbar {
+            background-color: var(--color-secondary);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo a {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-icon {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Contenedor principal */
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            gap: 2rem;
+            flex: 1;
+        }
+
+        /* Sidebar para pasos de compra */
+        .sidebar {
+            width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .checkout-steps {
+            list-style: none;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .step:last-child {
+            border-bottom: none;
+        }
+
+        .step-number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            color: white;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .step.completed .step-number {
+            background-color: var(--color-success);
+        }
+
+        .step.active .step-number {
+            background-color: var(--color-accent);
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+        }
+
+        /* Sección principal para resumen de producto */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .product-summary {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .product-image {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .product-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .option-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .option-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+        }
+
+        /* Sección de pago */
+        .payment-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+
+        .payment-title {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .payment-summary {
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .payment-row:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .checkout-button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .checkout-button:hover {
+            background-color: var(--color-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-secondary);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+
+        /* Media queries para responsividad */
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                order: 1;
+            }
+
+            .main-content {
+                order: 0;
+            }
+
+            .product-summary {
+                flex-direction: column;
+            }
+
+            .product-image {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--color-secondary);
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .product-options {
+                flex-direction: column;
+            }
+
+            .option-group {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar en la parte superior -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <a href="/">CasElite</a>
+            </div>
+            <button class="menu-toggle" aria-label="Menú">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Inicio</a></li>
+                    <li><a href="#caracteristicas">Productos</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#envios">Envíos</a></li>
+                    <li><a href="compras.html">Compra</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="testimonios.html">Testimonio</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <span class="nav-icon">🔍</span>
+                <span class="nav-icon">🛒</span>
+                <span class="nav-icon">👤</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor principal -->
+    <div class="main-container">
+        <!-- Sidebar con pasos de compra -->
+        <aside class="sidebar">
+            <h2 class="sidebar-title">Proceso de Compra</h2>
+            <ul class="checkout-steps">
+                <li class="step completed">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Selección de Producto</div>
+                        <div class="step-description">Elige el modelo y características</div>
+                    </div>
+                </li>
+                <li class="step active">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Resumen y Pago</div>
+                        <div class="step-description">Confirma tu pedido y paga</div>
+                    </div>
+                </li>
+                <li class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Envío</div>
+                        <div class="step-description">Elige tu método de envío preferido</div>
+                    </div>
+                </li>
+                <li class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Confirmación</div>
+                        <div class="step-description">Recibe confirmación de tu pedido</div>
+                    </div>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Contenido principal para resumen de producto -->
+        <main class="main-content">
+            <section class="product-summary">
+                <img src="data:image/jpeg;base64,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" alt="Funda Antigolpes iPhone 15 Pro" class="product-image">
+                <div class="product-details">
+                    <h1 class="product-title">Funda Antigolpes Premium para iPhone 15 Pro</h1>
+                    <div class="product-price">S/.24,99</div>
+                    <p class="product-description">Protección de grado militar con tecnología de absorción de impactos. Protege tu iPhone 15 Pro contra caídas y golpes sin añadir volumen excesivo. Diseño elegante con acabados premium.</p>
+                    
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label for="color" class="option-label">Color:</label>
+                            <select id="color" class="option-select">
+                                <option value="negro">Negro Mate</option>
+                                <option value="azul">Azul Marino</option>
+                                <option value="transparente">Transparente</option>
+                                <option value="rosa">Rosa Pastel</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label for="quantity" class="option-label">Cantidad:</label>
+                            <select id="quantity" class="option-select">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="payment-section">
+                <h2 class="payment-title">Resumen del Pedido</h2>
+                <div class="payment-summary">
+                    <div class="payment-row">
+                        <span>Producto</span>
+                        <span>S./24,99</span>
+                    </div>
+                    <div class="payment-row">
+                        <span>Envío</span>
+                        <span>Gratis</span>
+                    </div>
+                    <div class="payment-row">
+                        <span>Impuestos</span>
+                        <span>S/.5,25</span>
+                    </div>
+                    <div class="payment-row">
+                        <span>Total</span>
+                        <span>S/.30,24</span>
+                    </div>
+                </div>
+                <button class="checkout-button">Finalizar Compra</button>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 CasElite - Todos los derechos reservados</p>
+    </footer>
+</body>
+</html>
