@@ -21,23 +21,26 @@
 </head>
 <body class="flex flex-col min-h-screen bg-gray-100 text-gray-800">
     <header class="bg-secondary text-white sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <div class="text-xl font-bold">
-                    <a href="/" class="text-white no-underline">CasElite</a>
-                </div>
-                <nav class="hidden md:block">
-                    <ul class="flex space-x-6">
-                        <li><a href="#hero" class="text-white no-underline">Inicio</a></li>
-                        <li><a href="#caracteristicas" class="text-white no-underline">Productos</a></li>
-                        <li><a href="#galeria" class="text-white no-underline">Galería</a></li>
-                        <li><a href="#envios" class="text-white no-underline">Envíos</a></li>
-                        <li><a href="compras.html" class="text-white no-underline">Compra</a></li>
-                        <li><a href="#contacto" class="text-white no-underline">Contacto</a></li>
-                        <li><a href="testimonios.html" class="text-white no-underline">Testimonio</a></li>
-                    </ul>
-                </nav>
-                <button class="md:hidden text-white text-2xl">≡</button>
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="font-bold text-2xl">
+                <a href="/" class="text-white">CasElite</a>
+            </div>
+            <button class="md:hidden text-2xl" aria-label="Menú">☰</button>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-white">Inicio</a></li>
+                    <li><a href="#caracteristicas" class="text-white">Productos</a></li>
+                    <li><a href="#galeria" class="text-white">Galería</a></li>
+                    <li><a href="#envios" class="text-white">Envíos</a></li>
+                    <li><a href="compras.html" class="text-white">Compra</a></li>
+                    <li><a href="#contacto" class="text-white">Contacto</a></li>
+                    <li><a href="testimonios.html" class="text-white">Testimonio</a></li>
+                </ul>
+            </nav>
+            <div class="flex space-x-4 items-center">
+                <span class="cursor-pointer">🔍</span>
+                <span class="cursor-pointer">🛒</span>
+                <span class="cursor-pointer">👤</span>
             </div>
         </div>
     </header>
